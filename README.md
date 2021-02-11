@@ -1,8 +1,8 @@
 
 
-Amaç bir bankanın müşterilerinin bankayı terk etme ya da terk etmeme durumunun tahmin edilmesidir.
+#### Amaç bir bankanın müşterilerinin bankayı terk etme ya da terk etmeme durumunun tahmin edilmesidir.
 
-Müşteri terkini tanımlayan olay müşterinin banka hesabını kapatmasıdır.
+#### Müşteri terkini tanımlayan olay müşterinin banka hesabını kapatmasıdır.
 
 #### Veri Seti Hikayesi:
 

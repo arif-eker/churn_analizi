@@ -50,3 +50,4 @@ def get_tuned_models(x_train, y_train, rnd_state):
     xgb_tuned = XGBClassifier(**xgb_cv_model.best_params_, random_state=rnd_state).fit(x_train, y_train)
 
     return lgbm_tuned, rf_tuned, xgb_tuned
+

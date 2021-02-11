@@ -10,6 +10,10 @@ from xgboost import XGBClassifier
 from sklearn import preprocessing
 
 
+low_q1 = 0.05
+upper_q3 = 0.95
+correlation_limit = 0.60
+
 def cat_summary(dataframe, categorical_columns, target, plot=False):
     """
     -> Kategorik değişkenlerin sınıflarının oranını ve targettaki medyanı gösterir.

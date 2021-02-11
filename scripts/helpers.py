@@ -9,10 +9,10 @@ from xgboost import XGBClassifier
 
 from sklearn import preprocessing
 
-
 low_q1 = 0.05
 upper_q3 = 0.95
 correlation_limit = 0.60
+
 
 def cat_summary(dataframe, categorical_columns, target, plot=False):
     """
@@ -94,6 +94,30 @@ def find_correlation(dataframe, numeric_columns, target, corr_limit=correlation_
                 low_correlations.append(col + " : " + str(correlation))
 
     return low_correlations, high_correlations
+
+
+def add_features(dataframe):
+    bins = [15, 25, 40, 55, 100]
+    names = ['Young', 'Adult', 'Mature', 'Old']
+    dataframe["NEW_Age_Range"] = pd.cut(dataframe['Age'], bins, labels=names)
+
+    bins = [0, 2, 4, 6, 14]
+    names = ['New', 'Accustomed', 'Loyal', 'Constant']
+    dataframe["NEW_Tenure_Status"] = pd.cut(dataframe['Tenure'], bins, labels=names)
+
+    names = ['CAT1', 'CAT2', 'CAT3', 'CAT4', 'CAT5']
+    dataframe["NEW_CreditScore_Status"] = pd.qcut(dataframe['CreditScore'], 5, labels=names)
+
+    names = ['CAT1', 'CAT2', 'CAT3', 'CAT4', 'CAT5']
+    dataframe["NEW_EstimatedSalary_Status"] = pd.qcut(dataframe['EstimatedSalary'], 5, labels=names)
+
+    dataframe["NEW_Card_Member_Score"] = dataframe["HasCrCard"] * dataframe["IsActiveMember"]
+
+    dataframe["NEW_MemberStarts_Age"] = dataframe["Age"] - dataframe["Tenure"]
+
+    bins = [5, 25, 40, 55, 100]
+    names = ['Young', 'Adult', 'Mature', 'Old']
+    dataframe["NEW_MemberStarts_Age_Range"] = pd.cut(dataframe["NEW_MemberStarts_Age"], bins, labels=names)
 
 
 def outlier_thresholds(dataframe, variable, low_quantile=low_q1, up_quantile=upper_q3):
